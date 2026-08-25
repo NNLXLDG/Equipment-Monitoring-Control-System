@@ -1,0 +1,1 @@
+import{H as t}from"./index-DjiMJg-U.js";function i(){return t.get("/permissions/tree").then(e=>e.data)}function o(e){return t.post("/permissions",e).then(s=>s.data)}function a(e,s){return t.put(`/permissions/${e}`,s).then(n=>n.data)}function u(e){return t.delete(`/permissions/${e}`).then(s=>s.data)}export{o as c,u as d,i as g,a as u};

@@ -1,0 +1,53 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: emcs
+  datasource:
+    url: jdbc:mysql://localhost:3306/device_monitor?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: ""
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: Asia/Shanghai
+
+# JWT 配置
+jwt:
+  secret: emcs-secret-key-please-change-in-production-2024
+  expiration: 86400   # 秒，24 小时
+
+# MQTT 配置
+mqtt:
+  broker: tcp://localhost:1883
+  client-id: emcs-server
+  username: ""
+  password: ""
+  subscribe-topic: /kettle/pub
+  publish-topic-prefix: ""    # 控制主题为 /{devId}/sub
+  qos: 1
+  # 内嵌 Broker（开发/演示用，可关闭后连外部 Broker）
+  embedded:
+    enabled: true
+    host: 0.0.0.0
+    port: 1883
+
+# 设备数据模拟器（开发/演示用，演示上报数据）
+simulator:
+  enabled: true
+  interval: 5      # 秒
+  device-ids: 492C230518046576,492C230518046577,492C230518046578
+
+logging:
+  level:
+    com.emcs: info
+    io.moquette: warn
